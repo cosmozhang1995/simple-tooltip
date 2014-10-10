@@ -114,16 +114,16 @@ class SimpleTooltip extends SimpleModule
       # else
       #   position = horizontal.position
       if pointToSize.bottom + distance + @arrowSize.height / 2 + @elSize.height < windowSize.height
-        if pointToSize.centerX - @elSize.width / 2 < 0 and pointToSize.centerX - @elSize.width / 2 + @elSize.width < windowSize.width
+        if pointToSize.centerX - domSize.scrollLeft - @elSize.width / 2 < 0 and pointToSize.centerX - domSize.scrollLeft + @elSize.width / 2 < windowSize.width
           position = "right"
-        else if pointToSize.centerX - @elSize.width / 2 > 0 and pointToSize.centerX - @elSize.width / 2 + @elSize.width > windowSize.width
+        else if pointToSize.centerX - domSize.scrollLeft - @elSize.width / 2 > 0 and pointToSize.centerX - domSize.scrollLeft + @elSize.width / 2 > windowSize.width
           position = "left"
         else
           position = "bottom"
       else if pointToSize.top - distance - @arrowSize.height / 2 - @elSize.height > 0
-        if pointToSize.centerX - @elSize.width / 2 < 0 and pointToSize.centerX - @elSize.width / 2 + @elSize.width < windowSize.width
+        if pointToSize.centerX - domSize.scrollLeft - @elSize.width / 2 < 0 and pointToSize.centerX - domSize.scrollLeft + @elSize.width / 2 < windowSize.width
           position = "right"
-        else if pointToSize.centerX - @elSize.width / 2 > 0 and pointToSize.centerX - @elSize.width / 2 + @elSize.width > windowSize.width
+        else if pointToSize.centerX - domSize.scrollLeft - @elSize.width / 2 > 0 and pointToSize.centerX - domSize.scrollLeft + @elSize.width / 2 > windowSize.width
           position = "left"
         else
           position = "top"
