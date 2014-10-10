@@ -8,10 +8,10 @@ This module creates a simple tooltip for a specified element. When mouse moved o
 </p>
 <h2>Usage</h2>
 <p>
-Just include jquery and simple-tooltip.js and use the following sentence to enable the tooltip:
+Just include jquery and simple-tooltip.js and use the following sentence to enable the tooltip:<br/>
 <code>
 simple.tooltip({<br/>
-&nbsp;&nbsp;: "#need-tooltip",<br/>
+&nbsp;&nbsp;pointTo: "#need-tooltip",<br/>
 &nbsp;&nbsp;content: "I'm a tooltip"<br/>
 });<br/>
 </code>
