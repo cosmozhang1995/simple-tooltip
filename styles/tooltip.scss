@@ -1,7 +1,7 @@
 
 $tooltip_color: #000000;
 $text_color: white;
-$arrow_size: 10px;
+$arrow_size: 7px;
 
 .simple-tooltip {
 	position: absolute;
@@ -24,25 +24,28 @@ $arrow_size: 10px;
 	height: 0px;
 	border-style: solid;
 	border-width: $arrow_size;
-	margin-left: 50%;
 }
-.simple-tooltip-arrow.simple-tooltip-arrow-top {
+.simple-tooltip-bottom .simple-tooltip-arrow {
 	border-color: transparent transparent $tooltip_color transparent;
-	bottom: 0px;
+	top: - 2 * $arrow_size;
+	margin-left: 50%;
 	left: -$arrow_size;
 }
-.simple-tooltip-arrow.simple-tooltip-arrow-bottom {
+.simple-tooltip-top .simple-tooltip-arrow {
 	border-color: $tooltip_color transparent transparent transparent;
-	top: 100%;
+	bottom: - 2 * $arrow_size;
+	margin-left: 50%;
 	left: -$arrow_size;
 }
-.simple-tooltip-arrow.simple-tooltip-arrow-left {
+.simple-tooltip-right .simple-tooltip-arrow {
 	border-color: transparent $tooltip_color transparent transparent;
-	right: 100%;
-	top: -$arrow_size;
+	left:  - 2 * $arrow_size;
+	margin-top: -$arrow_size;
+	top: 50%;
 }
-.simple-tooltip-arrow.simple-tooltip-arrow-right {
+.simple-tooltip-left .simple-tooltip-arrow {
 	border-color: transparent transparent transparent $tooltip_color;
-	left: 0px;
-	top: -$arrow_size;
+	right: - 2 * $arrow_size;
+	margin-top: -$arrow_size;
+	top: 50%;
 }

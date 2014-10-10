@@ -1,17 +1,142 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Simple Sample Demo</title>
+    <title>Simple Tooltip Demo</title>
     <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="styles/tooltip.css">
+    <script type="text/javascript" src="vendor/bower/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="vendor/bower/simple-module/lib/module.js"></script>
+    <script type="text/javascript" src="lib/tooltip.js"></script>
 </head>
 
 <body>
 
+<style type="text/css">
+.btn {
+	margin: 50px;
+	display: inline-block;
+	cursor: pointer;
+	padding: 5px;
+	border-radius: 3px;
+	border: 1px #fff0f0 solid;
+}
+.btn:hover,.btn.btn-active {
+	background-color: #fff0f0;
+}
+.point-to {
+}
+.point-to-drag {
+	margin: 0px;
+}
+</style>
+
 <div class="wrapper">
+	<div>
+		<h1 style="margin-left:50px;">Simple Tooltip Demo</h1>
+	</div>
+	<div>
+		<div class="btn" id="button-enable">Enable tooltip</div>
+		<div class="btn" id="button-disable">Disable tooltip</div>
+	</div>
+	<div>
+		<div class="btn point-to" id="point-to-top">Top</div>
+		<div class="btn point-to" id="point-to-right">Right</div>
+		<div class="btn point-to" id="point-to-bottom">Bottom</div>
+		<div class="btn point-to" id="point-to-left">Left</div>
+	
+		<div class="btn point-to point-to-drag" id="point-to-auto">Drag me to see the auto-positioned tooltip</div>
+	</div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#button-enable').click(enable);
+	$('#button-disable').click(disable);
+	enable();
+});
+
+var simpleTooltipLeft;
+var simpleTooltipRight;
+var simpleTooltipTop;
+var simpleTooltipBottom;
+var simpleTooltipAuto;
+function enable() {
+	$('#button-enable').addClass("btn-active");
+	$('#button-disable').removeClass("btn-active");
+
+	simpleTooltipTop = simple.tooltip({
+		pointTo: "#point-to-top",
+		content: "I'm on top",
+		position: "top"
+	});
+	simpleTooltipRight = simple.tooltip({
+		pointTo: "#point-to-right",
+		content: "I'm on right",
+		position: "right"
+	});
+	simpleTooltipBottom = simple.tooltip({
+		pointTo: "#point-to-bottom",
+		content: "I'm on bottom",
+		position: "bottom"
+	});
+	simpleTooltipLeft = simple.tooltip({
+		pointTo: "#point-to-left",
+		content: "I'm on left",
+		position: "left"
+	});
+
+	simpleTooltipAuto = simple.tooltip({
+		pointTo: "#point-to-auto",
+		content: "I'm positioned automatically",
+		cls: "simple-tooltip-auto",
+		distance: 10
+	});
+}
+function disable() {
+	$('#button-enable').removeClass("btn-active");
+	$('#button-disable').addClass("btn-active");
+
+	simpleTooltipTop.destroy();
+	simpleTooltipRight.destroy();
+	simpleTooltipBottom.destroy();
+	simpleTooltipLeft.destroy();
+	simpleTooltipAuto.destroy();
+}
+
+function drag(ele) {
+	var start = {x:0, y:0, top:0, left:0};
+	start.top = $(ele).offset().top;
+	start.left = $(ele).offset().left;
+	var started = false;
+	$(ele).css('position', 'absolute');
+	$(ele).css('left', start.left + 'px');
+	$(ele).css('top', start.top + 'px');
+	$(ele).on('mousedown.drag', function(e) {
+		e.preventDefault();
+		start.x = e.pageX;
+		start.y = e.pageY;
+		start.top = $(ele).offset().top;
+		start.left = $(ele).offset().left;
+		started = true;
+	});
+	$(document).on('mousemove.drag', function(e) {
+		if (started) {
+			e.preventDefault();
+			var distance = {
+				x: e.pageX - start.x,
+				y: e.pageY - start.y
+			};
+			$(ele).css('left', (start.left + distance.x) + 'px');
+			$(ele).css('top', (start.top + distance.y) + 'px');
+		}
+	});
+	$(document).on('mouseup.drag', function(e) {
+		started = false;
+	});
+}
+drag('#point-to-auto');
+</script>
 
 </body>
 
 </html>
-
-

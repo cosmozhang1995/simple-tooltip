@@ -18,30 +18,33 @@
   width: 0px;
   height: 0px;
   border-style: solid;
-  border-width: 10px;
-  margin-left: 50%;
+  border-width: 7px;
 }
 
-.simple-tooltip-arrow.simple-tooltip-arrow-top {
+.simple-tooltip-bottom .simple-tooltip-arrow {
   border-color: transparent transparent #000000 transparent;
-  bottom: 0px;
-  left: -10px;
+  top: -14px;
+  margin-left: 50%;
+  left: -7px;
 }
 
-.simple-tooltip-arrow.simple-tooltip-arrow-bottom {
+.simple-tooltip-top .simple-tooltip-arrow {
   border-color: #000000 transparent transparent transparent;
-  top: 100%;
-  left: -10px;
+  bottom: -14px;
+  margin-left: 50%;
+  left: -7px;
 }
 
-.simple-tooltip-arrow.simple-tooltip-arrow-left {
+.simple-tooltip-right .simple-tooltip-arrow {
   border-color: transparent #000000 transparent transparent;
-  right: 100%;
-  top: -10px;
+  left: -14px;
+  margin-top: -7px;
+  top: 50%;
 }
 
-.simple-tooltip-arrow.simple-tooltip-arrow-right {
+.simple-tooltip-left .simple-tooltip-arrow {
   border-color: transparent transparent transparent #000000;
-  left: 0px;
-  top: -10px;
+  right: -14px;
+  margin-top: -7px;
+  top: 50%;
 }

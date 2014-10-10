@@ -7,6 +7,7 @@ class SimpleTooltip extends SimpleModule
     position: null  # position of the tooltip, should be "top", "bottom", "left", "right" or null
                     # When set null, the position is determined automatically
     cls: null       # optional class name of the tooltip element
+    distance: 5    # distance between the tooltip and the binded element (in px)
 
   @spacename: "simple-tooltip"
 
@@ -27,6 +28,9 @@ class SimpleTooltip extends SimpleModule
       throw "[Tooltip] You must specify an element by 'pointTo' option"
     if @opts.content is null
       throw "[Tooltip] You must specify the content by 'content' option"
+    if @opts.position isnt "top" and @opts.position isnt "bottom" and @opts.position isnt "left" and @opts.position isnt "right" and @opts.position isnt null
+      throw "[Tooltip] \" #{@opts.position} \" is not a valid position"
+
     @_render()
     @_bind()
 
@@ -41,8 +45,12 @@ class SimpleTooltip extends SimpleModule
     @tooltipSize.width = @content.width()
     @tooltipSize.height = @content.height()
     @arrowSize = {}
-    @arrowSize.width = @arrow.width()
-    @arrowSize.height = @arrow.height()
+    @arrowSize.width = @arrow.outerWidth()
+    @arrowSize.height = @arrow.outerHeight()
+    @elSize = {}
+    @elSize.width = @el.width()
+    @elSize.height = @el.height()
+    @el.hide()
 
   _bind: ->
     @pointTo.on 'mouseenter.simple-tooltip', (e)=>
@@ -51,6 +59,10 @@ class SimpleTooltip extends SimpleModule
     @pointTo.on 'mouseout.simple-tooltip', (e)=>
       e.preventDefault()
       @hideTooltip(e)
+
+  _unbind: ->
+    @pointTo.off 'mouseenter.simple-tooltip'
+    @pointTo.off 'mouseout.simple-tooltip'
 
   showTooltip: (e)->
     # get necessary sizes
@@ -69,6 +81,8 @@ class SimpleTooltip extends SimpleModule
     domSize = {}
     domSize.scrollTop = $(document).scrollTop()
     domSize.scrollLeft = $(document).scrollLeft()
+
+    distance = @opts.distance
 
     position = @opts.position
     # if position is not set, calculate it
@@ -97,22 +111,46 @@ class SimpleTooltip extends SimpleModule
         position = vertical.position
       else
         position = horizontal.position
-    console.log "tooltip position: ", position
+    console.log "[Tooltip] tooltip position: ", position
 
-    @arrow.removeClass("simple-tooltip-arrow-left");
-    @arrow.removeClass("simple-tooltip-arrow-right");
-    @arrow.removeClass("simple-tooltip-arrow-top");
-    @arrow.removeClass("simple-tooltip-arrow-bottom");
-    @arrow.addClass("simple-tooltip-arrow-"+position);
+    # specify postion class name for arrow element
+    @el.removeClass("simple-tooltip-left");
+    @el.removeClass("simple-tooltip-right");
+    @el.removeClass("simple-tooltip-top");
+    @el.removeClass("simple-tooltip-bottom");
+    @el.addClass("simple-tooltip-"+position);
 
-    console.log pointToSize
+    # remove absolute position css attributes for el
+    @el.each ->
+      this.style.top = null
+      this.style.bottom = null
+      this.style.left = null
+      this.style.right = null
+
+    # specify absolute position css attributes for el
+    switch position
+      when "top" 
+        @el.css 'top', (pointToSize.top - distance - @arrowSize.height / 2 - @elSize.height) + 'px'
+        @el.css 'left', (pointToSize.centerX - @elSize.width / 2) + 'px'
+      when "bottom" 
+        @el.css 'top', (pointToSize.bottom + distance + @arrowSize.height / 2) + 'px'
+        @el.css 'left', (pointToSize.centerX - @elSize.width / 2) + 'px'
+      when "left" 
+        @el.css 'top', (pointToSize.centerY - @elSize.height / 2) + 'px'
+        @el.css 'left', (pointToSize.left - distance - @arrowSize.width / 2 - @elSize.width) + 'px'
+      when "right" 
+        @el.css 'top', (pointToSize.centerY - @elSize.height / 2) + 'px'
+        @el.css 'left', (pointToSize.right + distance + @arrowSize.width / 2) + 'px'
+      else
+        console.error "[Tooltip] \" #{position} \" is not a valid position"
+
+    @el.fadeIn "fast"
 
   hideTooltip: (e)->
+    @el.fadeOut "fast"
 
-  sayHello: ->
-    prompt = "Hello World"
-    console.log prompt
-    alert prompt
+  destroy: ->
+    @_unbind()
 
 tooltip = (opts) ->
   new SimpleTooltip(opts)

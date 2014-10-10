@@ -10,10 +10,10 @@ This module creates a simple tooltip for a specified element. When mouse moved o
 <p>
 Just include jquery and simple-tooltip.js and use the following sentence to enable the tooltip:
 <code>
-simple.tooltip({
-	: "#need-tooltip",
-	content: "I'm a tooltip"
-});
+simple.tooltip({<br/>
+&nbsp;&nbsp;: "#need-tooltip",<br/>
+&nbsp;&nbsp;content: "I'm a tooltip"<br/>
+});<br/>
 </code>
 <p>
 </p>
@@ -83,5 +83,43 @@ simple.tooltip({
 			no
 		</td>
 	</tr>
+	<tr>
+		<td>
+			distance
+		</td>
+		<td>
+			integer
+		</td>
+		<td>
+			distance between the tooltip and the binded element (in px). Default is 5.
+		</td>
+		<td>
+			no
+		</td>
+	</tr>
 </table>
+</p>
+<h2>Destroy</h2>
+<p><code>simple.tooltip()</code> returns an instance SimpleTooltip which controls the function of tooltip. If you don't want the tooltip any more, call <code>destroy</code> method of the object</p>
+<h2>The author says</h2>
+<p>
+Thanks to mycolorway for providing me such a challenging question. I am very excited to complete it.
+</p>
+<p>
+Before composing this project, I have never used CoffeeScript and Sass. They are beautiful and powerful langueges, or tools, for front-end developing. I'll be very glad to have another chance of using them.
+</p>
+<p>
+Using bower to manage the front-end dependencies is very convenient. This is the second time I use it. And I really charmed by it.
+</p>
+<p>
+Of course, this project is completed in a relatively short time, and lacks testings and examines. If problems appears, please contact me and I'll fix them at the first time.
+</p>
+<p>
+Thanks for all!
+</p>
+<p style="text-align:right;">
+Cosmo Zhang<br/>
+<a href="mailto:zjzxz3006@126.com">zjzxz3006@126.com</a><br/>
+Beijing University of Posts and Telecommunications<br/>
+Oct 10th, 2014<br/>
 </p>
