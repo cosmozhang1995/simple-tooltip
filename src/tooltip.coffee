@@ -85,32 +85,45 @@ class SimpleTooltip extends SimpleModule
     distance = @opts.distance
 
     position = @opts.position
+
     # if position is not set, calculate it
     if position is null
-      marginLeft = pointToSize.left - domSize.scrollLeft
-      marginRight = windowSize.width - (pointToSize.right - domSize.scrollLeft)
-      marginTop = pointToSize.top - domSize.scrollTop
-      marginBottom = windowSize.height - (pointToSize.bottom - domSize.scrollTop)
-      if (marginTop > marginBottom)
-        vertical = 
-          margin: marginTop
-          position: "top"
+      # not using this logic anymore
+      # marginLeft = pointToSize.left - domSize.scrollLeft
+      # marginRight = windowSize.width - (pointToSize.right - domSize.scrollLeft)
+      # marginTop = pointToSize.top - domSize.scrollTop
+      # marginBottom = windowSize.height - (pointToSize.bottom - domSize.scrollTop)
+      # if (marginTop > marginBottom)
+      #   vertical = 
+      #     margin: marginTop
+      #     position: "top"
+      # else
+      #   vertical = 
+      #     margin: marginBottom
+      #     position: "bottom"
+      # if (marginLeft > marginRight)
+      #   horizontal = 
+      #     margin: marginLeft
+      #     position: "left"
+      # else
+      #   horizontal = 
+      #     margin: marginRight
+      #     position: "right"
+      # if (vertical.margin > horizontal.margin)
+      #   position = vertical.position
+      # else
+      #   position = horizontal.position
+      if pointToSize.bottom + distance + @arrowSize.height / 2 + @elSize.height < windowSize.height
+        position = "bottom"
+      else if pointToSize.top - distance - @arrowSize.height / 2 - @elSize.height > 0
+        position = "top"
+      else if pointToSize.left - distance - @arrowSize.width / 2 - @elSize.width > 0
+        position = "left"
+      else if pointToSize.right + distance + @arrowSize.width / 2 + @elSize.width < windowSize.width
+        position = "right"
       else
-        vertical = 
-          margin: marginBottom
-          position: "bottom"
-      if (marginLeft > marginRight)
-        horizontal = 
-          margin: marginLeft
-          position: "left"
-      else
-        horizontal = 
-          margin: marginRight
-          position: "right"
-      if (vertical.margin > horizontal.margin)
-        position = vertical.position
-      else
-        position = horizontal.position
+        position = "bottom"
+
     console.log "[Tooltip] tooltip position: ", position
 
     # specify postion class name for arrow element
