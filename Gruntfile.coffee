@@ -11,25 +11,25 @@ module.exports = (grunt) ->
           style: 'expanded'
           sourcemap: 'none'
         files:
-          'styles/sample.css': 'styles/sample.scss'
+          'styles/tooltip.css': 'styles/tooltip.scss'
 
     coffee:
       src:
         options:
           bare: true
         files:
-          'lib/sample.js': 'src/sample.coffee'
+          'lib/tooltip.js': 'src/tooltip.coffee'
       spec:
         files:
-          'spec/sample-spec.js': 'spec/sample-spec.coffee'
+          'spec/tooltip-spec.js': 'spec/tooltip-spec.coffee'
 
     umd:
       all:
-        src: 'lib/sample.js'
+        src: 'lib/tooltip.js'
         template: 'umd.hbs'
-        amdModuleId: 'simple-sample'
-        objectToExport: 'sample'
-        globalAlias: 'sample'
+        amdModuleId: 'simple-tooltip'
+        objectToExport: 'tooltip'
+        globalAlias: 'tooltip'
         deps:
           'default': ['$', 'SimpleModule']
           amd: ['jquery', 'simple-module']
@@ -57,8 +57,8 @@ module.exports = (grunt) ->
         src: ['lib/**/*.js']
         options:
           outfile: 'spec/index.html'
-          styles: 'styles/sample.css'
-          specs: 'spec/sample-spec.js'
+          styles: 'styles/tooltip.css'
+          specs: 'spec/tooltip-spec.js'
           vendor: [
             'vendor/bower/jquery/dist/jquery.min.js',
             'vendor/bower/simple-module/lib/module.js'

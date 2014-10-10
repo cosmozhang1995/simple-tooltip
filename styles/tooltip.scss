@@ -1,0 +1,48 @@
+
+$tooltip_color: #000000;
+$text_color: white;
+$arrow_size: 10px;
+
+.simple-tooltip {
+	position: absolute;
+  display: inline-block;
+}
+
+.simple-tooltip-body {
+	display: block;
+	background-color: $tooltip_color;
+	border-radius: 3px;
+	padding: 5px 10px;
+	text-align: center;
+	color: $text_color;
+}
+
+.simple-tooltip-arrow {
+	position: absolute;
+	display: inline-block;
+	width: 0px;
+	height: 0px;
+	border-style: solid;
+	border-width: $arrow_size;
+	margin-left: 50%;
+}
+.simple-tooltip-arrow.simple-tooltip-arrow-top {
+	border-color: transparent transparent $tooltip_color transparent;
+	bottom: 0px;
+	left: -$arrow_size;
+}
+.simple-tooltip-arrow.simple-tooltip-arrow-bottom {
+	border-color: $tooltip_color transparent transparent transparent;
+	top: 100%;
+	left: -$arrow_size;
+}
+.simple-tooltip-arrow.simple-tooltip-arrow-left {
+	border-color: transparent $tooltip_color transparent transparent;
+	right: 100%;
+	top: -$arrow_size;
+}
+.simple-tooltip-arrow.simple-tooltip-arrow-right {
+	border-color: transparent transparent transparent $tooltip_color;
+	left: 0px;
+	top: -$arrow_size;
+}
