@@ -114,9 +114,19 @@ class SimpleTooltip extends SimpleModule
       # else
       #   position = horizontal.position
       if pointToSize.bottom + distance + @arrowSize.height / 2 + @elSize.height < windowSize.height
-        position = "bottom"
+        if pointToSize.centerX - @elSize.width / 2 < 0 and pointToSize.centerX - @elSize.width / 2 + @elSize.width < windowSize.width
+          position = "right"
+        else if pointToSize.centerX - @elSize.width / 2 > 0 and pointToSize.centerX - @elSize.width / 2 + @elSize.width > windowSize.width
+          position = "left"
+        else
+          position = "bottom"
       else if pointToSize.top - distance - @arrowSize.height / 2 - @elSize.height > 0
-        position = "top"
+        if pointToSize.centerX - @elSize.width / 2 < 0 and pointToSize.centerX - @elSize.width / 2 + @elSize.width < windowSize.width
+          position = "right"
+        else if pointToSize.centerX - @elSize.width / 2 > 0 and pointToSize.centerX - @elSize.width / 2 + @elSize.width > windowSize.width
+          position = "left"
+        else
+          position = "top"
       else if pointToSize.left - distance - @arrowSize.width / 2 - @elSize.width > 0
         position = "left"
       else if pointToSize.right + distance + @arrowSize.width / 2 + @elSize.width < windowSize.width
